@@ -1,0 +1,22 @@
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>ニュース記事分類</title>
+</head>
+<body>
+  <p>分類したいニュース記事のURLを入力してください！</p>
+  <!-- urlフォーム -->
+  <form method="get" action="">
+    <p>
+      <input type='text' name='article_url' placeholder="記事URL">
+    </p>
+    <p>
+      <input type='submit' value='送信'>
+    </p>
+  </form>
+
+  {% if article_cat %}
+  <p>この記事のカテゴリーは  {{ article_cat }} です</p>
+  {% endif %}
+</body>
+</html>
