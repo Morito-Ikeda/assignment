@@ -3,11 +3,12 @@
 
 # In[1]:
 
+import time
+import os
+
 from bs4 import BeautifulSoup
 import urllib.request as req
 import urllib
-import time
-import os
 
 
 # In[2]:
