@@ -15,12 +15,12 @@ class Command(BaseCommand):
         maxp: Gunosyニュースの各カテゴリページの最大取得ページ数
         save_path: 取得・解析した記事の保存のパス
         dict_path: 使用したいシステム辞書のパス(デフォルトはipadic)
-        stopword: SlothLibによるストップワードを使うかどうか
+        stopword: データの解析時にSlothLibによるストップワードを使うかどうか
         '''
-        parser.add_argument('maxp', type=int)
-        parser.add_argument('save_path', type=str)
-        parser.add_argument('dict_path', type=str)
-        parser.add_argument('stopword', type=bool)
+        parser.add_argument('maxp', type=int, help='the number of pages yow want to scrape')
+        parser.add_argument('save_path', type=str, help='path which point processed data to save')
+        parser.add_argument('dict_path', type=str, default='None', help='path which point system dictionary to use')
+        parser.add_argument('stopword', type=bool, default='False', help='wheter you use stopword list or not')
 
     def handle(self, *args, **options):
         get_newsdata(options['maxp'], options['save_path'], options['dict_path'], options['stopword'])
