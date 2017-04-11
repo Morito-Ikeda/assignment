@@ -9,20 +9,28 @@ import numpy as np
 from .processing import Tokenizer
 
 
+category = ['エンタメ', 'スポーツ', 'おもしろ', '国内', '海外', 'コラム', 'IT・科学', 'グルメ']
+cat_nums = {}
+for i, cat in enumerate(category):
+    cat_nums[cat] = i
+
+
 def get_newsdata(maxp, save_path='../../../pkl_objects/data.pkl', dict_path=None, stopword=False):
     t = Tokenizer(dict_path, stopword)
     docs = []
     labels = []
 
-    category = ['エンタメ', 'スポーツ', 'おもしろ', '国内', '海外', 'コラム', 'IT・科学', 'グルメ']
     cat_urls = {}
     for i in range(8):
         cat = category[i]
         url = 'https://gunosy.com/categories/{0}'.format(i+1)
         cat_urls[cat] = url
 
+    print('\ndownloading ...')
+
     for cat in cat_urls.keys():
         cat_url = cat_urls[cat]
+        label = cat_nums[cat]
 
         for i in range(1, maxp+1):
             listpage_url = cat_url + '?page=' + str(i)
@@ -55,5 +63,7 @@ def get_newsdata(maxp, save_path='../../../pkl_objects/data.pkl', dict_path=None
 
     with open(save_path, 'wb') as f:
         pickle.dump(data, f)
+
+    print('finished !')
 
     return

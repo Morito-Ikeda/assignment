@@ -29,7 +29,7 @@ class Tokenizer(object):
 
         return stoplist
 
-
+    # 形態素解析
     def tokenize(self, text):
         words = []
 
@@ -38,7 +38,7 @@ class Tokenizer(object):
         while node:
             feature = node.feature.split(',')
             word = feature[-3] # 基本形
-            if word == '*':
+            if word == '*': # 未知語はそのままの形
                 word = node.surface
 
             if word in ['http://', '編集部']:
@@ -59,12 +59,11 @@ class Tokenizer(object):
                 node = node.next
                 continue
 
+            # 名詞と形容詞のみ。また、数詞を除く
             if feature[0] in ['名詞', '形容詞']  and feature[1] != '数':
                 if word not in self.stoplist:
                     words.append(word)
 
             node = node.next
-
-        # words = ' '.join(words)
 
         return words
