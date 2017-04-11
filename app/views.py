@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .classifier import *
+from .classifier import classify, get_cat
 
 # urlの入力フォーム
 def index(request):

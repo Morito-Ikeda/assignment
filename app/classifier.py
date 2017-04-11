@@ -10,12 +10,12 @@ sys.path.append('/Users/ikedamorito/Desktop/Gunosy/assignment')
 from utils.processing import Tokenizer
 
 
-# articleを解析器・分類器にかけ、結果(article_cat)を取得する関数
+# articleを解析器・分類器にかけ、結果(article_cat)を取得する
 def classify(article):
     with open('./pkl_objects/naivebayes.pkl', 'rb') as f:
         model = pickle.load(f)
-    t = Tokenizer(dic='/usr/local/lib/mecab/dic/mecab-ipadic-neologd/', stopword=False)
-    words = t.tokenize(article)
+    t = Tokenizer(dict_path='/usr/local/lib/mecab/dic/mecab-ipadic-neologd/', stopword=False)
+    words = [t.tokenize(article)]
     X = np.array(words)
     cat_num = model.predict(X)[0]
     cat_name = {
@@ -33,11 +33,12 @@ def classify(article):
     return article_cat
 
 
+# 記事のURLから、その記事のカテゴリを返す
 def get_cat(article_url):
     try:
         res = req.urlopen(article_url)
-    except urllib.error.HTTPError:
-        raise HTTPError('404 ERROR ! Page not Found')
+    except urllib.error.HTTPError as e:
+        raise HTTPError('HTTPError {0}'.format(e))
 
     soup = BeautifulSoup(res, 'html.parser')
     article = soup.find(class_='article').text.strip()
