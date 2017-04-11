@@ -16,7 +16,8 @@ assignmentディレクトリ上で操作を行います。
 ./manage.py downloadTokenizedData [maxp] [save_path] [dict_path] [stopword]
 ```
 
-と入力します。
+と入力します。  
+save_pathで指定した場所に、形態素解析やストップワード除去などを行ったニュース記事のデータが保存されます。
 
 ```
 maxp: Gunosyニュースの各カテゴリページの最大取得ページ数
