@@ -9,7 +9,7 @@ import pickle
 import numpy as np
 
 sys.path.append('/Users/ikedamorito/Desktop/Gunosy/assignment')
-form utils.classifier import NaiveBayes
+from utils.classifier import NaiveBayes
 from utils.train import get_cv_accuracy
 
 
@@ -23,8 +23,6 @@ np.random.shuffle(data)
     
 # グリッドサーチ用のパラメータ
 alphas = [1, 0.01, 0.05, 0.1, 0.5]
-# dics = ['/usr/local/lib/mecab/dic/mecab-ipadic-neologd/', '/usr/local/lib/mecab/dic/ipadic/']
-
 
 for alpha in alphas:
     # ナイーブベイズ分類
